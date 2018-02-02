@@ -1,0 +1,26 @@
+{
+  "name": "left4user.com",
+  "version": "1.0.0",
+  "description": "Simple server for static files + registration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puradawid/left4user.com.git"
+  },
+  "keywords": [
+    "left4user"
+  ],
+  "author": "Dawid Pura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puradawid/left4user.com/issues"
+  },
+  "homepage": "https://github.com/puradawid/left4user.com#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
