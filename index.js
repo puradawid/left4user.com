@@ -1,7 +1,7 @@
 const express = require('express'),
   app = express();
 
-app.use(express.static('static'));
+app.use(express.static('static', {"maxAge": "1d"}));
 
 
 
