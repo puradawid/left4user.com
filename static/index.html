@@ -25,6 +25,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
   </head>
 
@@ -110,10 +111,10 @@
         <div class="content">
             <h2>Join beta tests</h2>
               <h6>You have a chance to get free account for a 1 year!</h6>
-              <div class="bt_ariea">
-                <input type="text"  placeholder="Enter Email Address" />
-                  <input type="submit" value="SUBMIT" />
-              </div>
+              <form id="email_submission" class="bt_ariea">
+                <input type="text" type="email" name="email" placeholder="Enter Email Address" required/>
+                <input type="submit" value="SUBMIT" />
+              </form>
           </div>
       </div>
 
@@ -123,9 +124,14 @@
           </div>
       </div>
 
+      <div class="dialog">
+        Thank you! We will stay in touch!
+      </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
     $(document).ready(function(){
       $('.takeatour_btn').click(function(){
@@ -134,6 +140,31 @@
         },900);
       })
     })
+
+    $(document).find('.dialog')
+    .dialog({
+      autoOpen: false,
+      draggable: false,
+      classes: {
+        'ui-dialog': 'l4f-ui-dialog l4f'
+      }
+    });
+
+    $(document).find('#email_submission').on('submit', (e) => {
+      let formData = new FormData(e.target);
+      e.preventDefault();
+      $.ajax({
+        'url': '/email',
+        'method': 'POST',
+        'data': JSON.stringify({
+          'email': formData.get('email')
+        }),
+        'contentType': 'application/json'
+      }).done((err, done) => {
+        $('.dialog').dialog('option', 'width', window.innerWidth - (window.innerWidth * 0.1));
+        $('.dialog').dialog('open');
+      });
+    });
     </script>
 
   </body>

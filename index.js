@@ -1,11 +1,14 @@
-const express = require('express'),
-  app = express();
-
-app.use(express.static('static', {"maxAge": "1d"}));
+const App = require('./app');
 
 
+let store_path = process.env.STORE_PATH || '.',
+app = App(store_path + '/emails.txt');
 
+// System set-up
 const envVarPort = process.env.NODEJS_APP_PORT,
 port = envVarPort ? envVarPort : 8000;
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// Running HTTP server
+var server = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
